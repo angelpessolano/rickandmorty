@@ -159,7 +159,7 @@ export default function Root() {
           id="sidebar"
         > 
           <div className="h-[82] p-[42]">
-            <p className="text-22">Ricky and Morty</p>
+            <p className="text-slate-500 font-medium">Ricky and Morty</p>
           </div>
 
           <div className="relative w-full mt-5 mb-3">

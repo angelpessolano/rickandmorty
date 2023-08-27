@@ -43,12 +43,33 @@ const CardCharacterDetail = (data) => {
 <div className="flex items-center">
         <div className="relative">
           <div className="flex items-center justify-center w-20 h-20 mr-2 overflow-hidden rounded-full">
+          <figure className='relative mb-2 w-full h-4/5'>
+
             <img
               className="block mx-auto h-24 rounded-full sm:mx-0 sm:shrink-0"
               src={data.data.character.image}
               alt={data.data.character.name}
             />
+            {context.characterlike.indexOf(data.data.character.id)!==-1?<>  <div
+          className='absolute top-8 left-12 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1'>
+          
+            <svg
+                    class="w-[1.15rem] h-[1.15rem] text-green-500"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 20 18"
+                  >
+                    <path d="M17.947 2.053a5.209 5.209 0 0 0-3.793-1.53A6.414 6.414 0 0 0 10 2.311 6.482 6.482 0
+                     0 0 5.824.5a5.2 5.2 0 0 0-3.8 1.521c-1.915 1.916-2.315 5.392.625 8.333l7 
+                     7a.5.5 0 0 0 .708 0l7-7a6.6 6.6 0 0 0 2.123-4.508 5.179 5.179 0 0 0-1.533-3.793Z" />
+                  </svg>
+            </div></>:''}
+          
+            </figure>
+            
           </div>
+
           <p className="text-slate-900/[.80] text-xl font-bold py-3">
             {data.data.character.name}
           </p>

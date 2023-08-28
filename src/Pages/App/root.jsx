@@ -1,5 +1,5 @@
 import { useQuery, gql } from "@apollo/client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import CardCharacterDetail from "../../components/CharacterDetail";
 import Card from "../../components/card";
 import Search_c from "../../components/search";
@@ -90,6 +90,27 @@ function DataCharacter({ id }) {
   );
 }
 
+// function StarredCharacters({ id }) {
+//   const { loading, error, data } = useQuery(GET_DATA, { variables: { id } });
+//   const context = useContext(StarredCharacterContext);
+
+//   if (loading) return <p>Loading...</p>;
+//   if (error) return <p>Error : {error.message}</p>;
+
+//   return (
+//     <>
+//       <div
+//         className="bg-white h-10 w-10 border-current cursor-pointer sm:hidden"
+//         onClick={() => context.closeCharacterDetail()}
+//       >
+//         🔙
+//       </div>
+//       <CardCharacterDetail data={data} />
+//     </>
+//   );
+// }
+
+
 
 export default function Root() {
   const [name_c, setName_c] = useState("rick");
@@ -128,6 +149,12 @@ export default function Root() {
           <span className="text-xs text-slate-500 font-medium pl-3">
             STARRED CHARACTERS ({context.count})
           </span>
+          {/* <StarredCharacters name_c={name_c} id_c={id_c} /> */}
+
+          <span className="text-xs text-slate-500 font-medium pl-3">
+            CHARACTERS 
+          </span>
+
 
           <DisplayCharacters name_c={name_c} id_c={id_c} />
         </div>
@@ -140,7 +167,7 @@ export default function Root() {
                 context.characterDetail === false ? "hidden sm:block " : ""
               }`}
             >
-              <DataCharacter id={idm ? idm : ""} starred={starred} />
+              <DataCharacter id={idm ? idm : ""}  />
             </div>
           </>
         )}

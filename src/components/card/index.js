@@ -49,7 +49,7 @@ const Card = ({ data, id_c }) => {
               >
                 {context.characterlike.indexOf(id) !== -1 ? (
                   <svg
-                    class="w-[1.15rem] h-[1.15rem] text-green-500"
+                    className="w-[1.15rem] h-[1.15rem] text-green-500"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"

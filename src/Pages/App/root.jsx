@@ -7,19 +7,56 @@ import Filter_A from "../../components/Filter";
 import { StarredCharacterContext } from "../../context";
 
 import { useContext } from "react";
-
-const GET_CHARACTERS = gql`
-  query Characters($name_c: String!) {
-    characters(filter: { name: $name_c }) {
-      results {
-        id
-        name
-        image
-        species
-      }
+const GET_CHARACTERS=gql`
+query Characters($name_c: String!,$species:String, $status:String, $gender:String ){
+  characters( filter: { name: $name_c ,species:$species, status:$status,gender:$gender}) {
+  
+    results {
+      id
+      name
+      status
+      gender
+      image
+      species
     }
   }
-`;
+ 
+}
+
+
+`
+function DisplayCharacters({ name_c, id_c }) {
+  const context = useContext(StarredCharacterContext);
+  const species=context.filterspecie;
+
+  const { loading, error, data } = useQuery(GET_CHARACTERS, {
+    variables: { name_c,species },
+  });
+  //console.log(data);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error : {error.message}</p>;
+  //console.log(data.characters.results, name_c);
+
+  return (
+    <>
+      <Card data={data} id_c={id_c} />
+    </>
+  );
+}
+
+// const GET_CHARACTERS = gql`
+//   query Characters($name_c: String!) {
+//     characters(filter: { name: $name_c }) {
+//       results {
+//         id
+//         name
+//         image
+//         species
+//       }
+//     }
+//   }
+// `;
 
 const GET_DATA = gql`
   query Character($id: ID!) {
@@ -53,24 +90,6 @@ function DataCharacter({ id }) {
   );
 }
 
-function DisplayCharacters({ name_c, id_c }) {
-  const context = useContext(StarredCharacterContext);
-
-  const { loading, error, data } = useQuery(GET_CHARACTERS, {
-    variables: { name_c },
-  });
-  console.log(data);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error : {error.message}</p>;
-  //console.log(data.characters.results, name_c);
-
-  return (
-    <>
-      <Card data={data} id_c={id_c} />
-    </>
-  );
-}
 
 export default function Root() {
   const [name_c, setName_c] = useState("rick");
@@ -82,9 +101,9 @@ export default function Root() {
     //console.log("outside",id_c);
     setIdm(id_c);
   };
-  useEffect(() => {
-    console.log("cambio", context.characterlike);
-  }, [context.characterlike]);
+  // useEffect(() => {
+  //   console.log("cambio", context.characterlike);
+  // }, [context.characterlike]);
  
   const Search_ch = (val) => {
     
@@ -105,7 +124,7 @@ export default function Root() {
           </div>
 
           <Search_c Search_ch={Search_ch} />
-          {context.avancefilter===true?<Filter_A/>:<p>falso</p>}
+          {context.avancefilter===true?<Filter_A/>:''}
           <span className="text-xs text-slate-500 font-medium pl-3">
             STARRED CHARACTERS ({context.count})
           </span>

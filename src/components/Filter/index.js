@@ -8,14 +8,24 @@ import {
       Typography,
     } from "@material-tailwind/react";
 import { useState } from "react";
+import { useContext } from "react";
+import { StarredCharacterContext } from "../../context";
 
 const Filter_A = () => {
+      const context = useContext(StarredCharacterContext);
       const[character,setCharacter]=useState('');
       const[specie,setSpecie]=useState('');
 
       const handlebutton = (e) => {
             {e.target.name==="specie"?setSpecie(e.target.id):setCharacter(e.target.id)}
           };
+          function setFilter(){
+
+
+            {specie!== '' && specie!== 'All'? context.setFilterspecie(specie) :context.setFilterspecie('')}
+
+            context.closeAvancefilter();
+          }
 
 
       return(
@@ -174,7 +184,7 @@ const Filter_A = () => {
     <div class="md:w-2/3">
     
       <button class={`shadow bg-purple-400 hover: bg-purple-500 focus:shadow-outline
-       focus:outline-none text-white font-bold py-2 px-4 rounded ${character==='' && specie===''?'rounded opacity-50 cursor-not-allowed':''}`} type="button" onClick={()=>{console.log(character,specie);}}>
+       focus:outline-none text-white font-bold py-2 px-4 rounded ${character==='' && specie===''?'rounded opacity-50 cursor-not-allowed':''}`} type="button" onClick={()=>{setFilter()}}>
        Filter
       </button>
     </div>

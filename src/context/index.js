@@ -3,6 +3,8 @@ import { createContext, useState } from "react";
  export const StarredCharacterContext = createContext()
 
 export const StarredCharacterProvider = ({children})=>{
+
+     // const [name_c,set]
       const [count,setCount] = useState(0);
       const [characterDetail,setCharacterDetail] = useState(false);
      
@@ -16,6 +18,8 @@ export const StarredCharacterProvider = ({children})=>{
       const closeAvancefilter =() => setAvancefilter(false);
       const [filtercharacter,setFiltercharacter]=useState('');
       const [filterspecie,setFilterspecie]=useState('');
+
+      const[dataprocess,setDataprocess]=useState({});
 
   
       return(
@@ -33,7 +37,9 @@ export const StarredCharacterProvider = ({children})=>{
                   filtercharacter,
                   filterspecie,
                   setFiltercharacter,
-                  setFilterspecie
+                  setFilterspecie,
+                  dataprocess,
+                  setDataprocess,
 
                  
 

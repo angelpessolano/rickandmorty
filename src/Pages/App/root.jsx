@@ -8,14 +8,18 @@ import Filter_A from "../../components/Filter";
 import { StarredCharacterContext } from "../../context";
 
 import { useContext } from "react";
+
+
 const GET_CHARACTERS = gql`
   query Characters(
     $name_c: String!
     $species: String
     $status: String
     $gender: String
+    $pag: Int
   ) {
     characters(
+      page: $pag,
       filter: {
         name: $name_c
         species: $species
@@ -31,17 +35,23 @@ const GET_CHARACTERS = gql`
         image
         species
       }
+      info {
+              count
+              pages
+              next
+            }
     }
   }
 `;
 function DisplayCharacters({ name_c, id_c }) {
   const context = useContext(StarredCharacterContext);
   const species = context.filterspecie;
+  const pag = 0;
 
   const { loading, error, data } = useQuery(GET_CHARACTERS, {
-    variables: { name_c, species },
+    variables: { name_c, species,pag },
   });
-  //console.log(data);
+  console.log(data);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error : {error.message}</p>;
@@ -54,18 +64,6 @@ function DisplayCharacters({ name_c, id_c }) {
   );
 }
 
-// const GET_CHARACTERS = gql`
-//   query Characters($name_c: String!) {
-//     characters(filter: { name: $name_c }) {
-//       results {
-//         id
-//         name
-//         image
-//         species
-//       }
-//     }
-//   }
-// `;
 
 const GET_DATA = gql`
   query Character($id: ID!) {
@@ -149,9 +147,7 @@ export default function Root() {
           </div>
 
           <Search_c Search_ch={Search_ch} />
-          {context.avancefilter === true ? 
-         
-          <Filter_A /> : ""}
+          {context.avancefilter === true ? <Filter_A /> : ""}
 
           {context.count > 0 && context.filtercharacter !== "Others" ? (
             <>

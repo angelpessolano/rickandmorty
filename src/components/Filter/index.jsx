@@ -176,7 +176,7 @@ const Filter_A = () => {
 
       <div className="md:flex md:items-center">
         <button
-          className={` w-full shadow bg-purple-400 hover:bg-purple-500 focus:shadow-outline
+          className={`p-2 m-4 w-full shadow bg-purple-400 hover:bg-purple-500 focus:shadow-outline
        focus:outline-none text-white font-bold py-2 px-4 rounded sm:h-full ${
          character === "" && specie === ""
            ? "rounded opacity-50 cursor-not-allowed"

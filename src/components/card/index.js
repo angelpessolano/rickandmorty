@@ -1,12 +1,22 @@
 import { useContext } from "react";
 import { useState } from "react";
 import { StarredCharacterContext } from "../../context";
+import { useNavigate } from "react-router-dom";
+
+
+  
+
 
 const Card = ({ data, id_c }) => {
+  const navigate = useNavigate();
   const context = useContext(StarredCharacterContext);
   const handlecharacter = (character_id) => {
+
+   
+    navigate(`/character/${character_id}`);
     context.openCharacterDetail();
     id_c(character_id);
+
   };
   const elementlist = (id) => {
     //console.log("object", id);

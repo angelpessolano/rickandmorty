@@ -1,12 +1,15 @@
 import { useContext } from 'react'
 import { StarredCharacterContext} from '../../context'
+import { useNavigate } from "react-router-dom"
 
 const CardStarred = ({name_c, data,id_c,filter_c}) => {
+  const navigate = useNavigate();
   
   const context = useContext(StarredCharacterContext);
   console.log("Lista filter", filter_c);
   
   const handlecharacter = (character_id) => {
+      navigate(`/character/${character_id}`);   
       context.openCharacterDetail();
       id_c(character_id);
     };

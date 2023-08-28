@@ -40,14 +40,7 @@ export const StarredCharacterProvider = ({children})=>{
                   setFilterspecie,
                   dataprocess,
                   setDataprocess,
-
-                 
-
-            
-            }
-
-
-            }>
+            }}>
                   {children}
             </StarredCharacterContext.Provider>
 

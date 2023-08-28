@@ -1,15 +1,27 @@
 import { useQuery, gql } from "@apollo/client";
-import { useState } from "react";
-import CardCharacterDetail from "../../components/CharacterDetail";
+import { useState , useEffect} from "react";
 import Card from "../../components/card";
 import CardStarred from "../../components/cardstarred";
 import Search_c from "../../components/search";
 import Filter_A from "../../components/Filter";
 import { StarredCharacterContext } from "../../context";
+import { Outlet } from "react-router-dom";
+
 
 import { useContext } from "react";
 
-
+const GET_DATA = gql`
+  query Character($id: ID!) {
+    character(id: $id) {
+      id
+      name
+      status
+      gender
+      image
+      species
+    }
+  }
+`;
 const GET_CHARACTERS = gql`
   query Characters(
     $name_c: String!
@@ -46,7 +58,7 @@ const GET_CHARACTERS = gql`
 function DisplayCharacters({ name_c, id_c }) {
   const context = useContext(StarredCharacterContext);
   const species = context.filterspecie;
-  const pag = 0;
+  const pag = 1;
 
   const { loading, error, data } = useQuery(GET_CHARACTERS, {
     variables: { name_c, species,pag },
@@ -65,37 +77,7 @@ function DisplayCharacters({ name_c, id_c }) {
 }
 
 
-const GET_DATA = gql`
-  query Character($id: ID!) {
-    character(id: $id) {
-      id
-      name
-      status
-      gender
-      image
-      species
-    }
-  }
-`;
-function DataCharacter({ id }) {
-  const { loading, error, data } = useQuery(GET_DATA, { variables: { id } });
-  const context = useContext(StarredCharacterContext);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error : {error.message}</p>;
-
-  return (
-    <>
-      <div
-        className="bg-white h-10 w-10 border-current cursor-pointer sm:hidden"
-        onClick={() => context.closeCharacterDetail()}
-      >
-        🔙
-      </div>
-      <CardCharacterDetail data={data} />
-    </>
-  );
-}
 
 function StarredCharacters({ name_c, id, id_c, filter_c }) {
   // console.log("QUE HAY",id);
@@ -115,11 +97,16 @@ function StarredCharacters({ name_c, id, id_c, filter_c }) {
       />
     </>
   );
-}
+ }
+
+// function
 
 export default function Root() {
-  const [name_c, setName_c] = useState("rick");
+
+  useEffect(() => {   },[]);
+  const [name_c, setName_c] = useState("");
   const [idm, setIdm] = useState(null);
+  
 
   const context = useContext(StarredCharacterContext);
   const id_c = (id_c) => {
@@ -189,7 +176,7 @@ export default function Root() {
                 context.characterDetail === false ? "hidden sm:block " : ""
               }`}
             >
-              <DataCharacter id={idm ? idm : ""} />
+              <Outlet/>
             </div>
           </>
         )}

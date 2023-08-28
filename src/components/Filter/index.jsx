@@ -1,11 +1,3 @@
-import {
-  Radio,
-  Card,
-  List,
-  ListItem,
-  ListItemPrefix,
-  Typography,
-} from "@material-tailwind/react";
 import { useState } from "react";
 import { useContext } from "react";
 import { StarredCharacterContext } from "../../context";
@@ -65,13 +57,13 @@ const Filter_A = () => {
             <label
               for="Allc"
               class="inline-flex items-center justify-between  p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
-              >
+            >
               <div class="block">
                 <div class="w-full text-lg font-semibold">All</div>
               </div>
             </label>
-            </li>
-            <li>
+          </li>
+          <li>
             <input
               type="radio"
               onChange={handlebutton}
@@ -88,28 +80,26 @@ const Filter_A = () => {
                 <div class="w-full text-lg font-semibold">Starred</div>
               </div>
             </label>
-            </li>
-            <li>
-              <input
-                type="radio"
-                onChange={handlebutton}
-                id="Others"
-                name="character"
-                value="Others"
-                class="hidden peer"
-              />
-              <label
-                htmlFor="Others"
-                class="inline-flex items-center justify-between  p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
-              >
-                <div class="block">
-                  <div class="w-full text-lg font-semibold">Others</div>
-                </div>
-              </label>
-            
+          </li>
+          <li>
+            <input
+              type="radio"
+              onChange={handlebutton}
+              id="Others"
+              name="character"
+              value="Others"
+              class="hidden peer"
+            />
+            <label
+              htmlFor="Others"
+              class="inline-flex items-center justify-between  p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+            >
+              <div class="block">
+                <div class="w-full text-lg font-semibold">Others</div>
+              </div>
+            </label>
           </li>
         </ul>
-
 
         <h3 class="mb-5 text-lg font-medium text-gray-900 dark:text-white">
           Species
@@ -151,26 +141,25 @@ const Filter_A = () => {
                 <div class="w-full text-lg font-semibold">Human</div>
               </div>
             </label>
-            </li>
+          </li>
           <li>
-              <input
-                type="radio"
-                onChange={handlebutton}
-                id="alien"
-                name="specie"
-                value="alien"
-                class="hidden peer"
-              />
-              <label
-                htmlFor="alien"
-                class="inline-flex items-center justify-between  p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
-              >
-                <div class="block">
-                  <div class="w-full text-lg font-semibold">Alien</div>
-                </div>
-              </label>
-            </li>
-          
+            <input
+              type="radio"
+              onChange={handlebutton}
+              id="alien"
+              name="specie"
+              value="alien"
+              class="hidden peer"
+            />
+            <label
+              htmlFor="alien"
+              class="inline-flex items-center justify-between  p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+            >
+              <div class="block">
+                <div class="w-full text-lg font-semibold">Alien</div>
+              </div>
+            </label>
+          </li>
         </ul>
       </>
 

@@ -1,42 +1,47 @@
 import { useContext } from 'react'
 import { StarredCharacterContext} from '../../context'
+import { useQuery, gql } from "@apollo/client";
+import { useParams } from 'react-router-dom';
+
+
+
+const GET_DATA = gql`
+  query Character($id: ID!) {
+    character(id: $id) {
+      id
+      name
+      status
+      gender
+      image
+      species
+    }
+  }
+`;
+function DataCharacter() {
+  let { id } = useParams();
+  const { loading, error, data } = useQuery(GET_DATA, { variables: { id } });
+  const context = useContext(StarredCharacterContext);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error : {error.message}</p>;
+
+  return (
+    <>
+      <div
+        className="bg-white h-10 w-10 border-current cursor-pointer sm:hidden"
+        onClick={() => context.closeCharacterDetail()}
+      >
+        🔙
+      </div>
+      <CardCharacterDetail data={data}  />
+    </>
+  );
+}
 
 const CardCharacterDetail = (data) => {
   const context = useContext(StarredCharacterContext)
 
-//   const showProduct = (productDetail) => {
-//     context.openProductDetail()
-//     context.setProductToShow(productDetail)
-//   }
 
-//   const addProductsToCart = (event, productData) => {
-//     event.stopPropagation()
-//     context.setCount(context.count + 1)
-//     context.setCartProducts([...context.cartProducts, productData])
-//     context.openCheckoutSideMenu()
-//     context.closeProductDetail()
-//   }
-
-//   const renderIcon = (id) => {
-//     const isInCart = context.cartProducts.filter(product => product.id === id).length > 0
-
-//     if (isInCart) {
-//       return (
-//         <div
-//           className='absolute top-0 right-0 flex justify-center items-center bg-black w-6 h-6 rounded-full m-2 p-1'>
-//           <CheckIcon className='h-6 w-6 text-white'></CheckIcon>
-//         </div>
-//       )
-//     } else {
-//       return (
-//         <div
-//           className='absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1'
-//           onClick={(event) => addProductsToCart(event, data.data)}>
-//           <PlusIcon className='h-6 w-6 text-black'></PlusIcon>
-//         </div>
-//       )
-//     }
-//   }
 
   return (
 <>
@@ -93,4 +98,4 @@ const CardCharacterDetail = (data) => {
   )
 }
 
-export default CardCharacterDetail
+export default DataCharacter

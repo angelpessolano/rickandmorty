@@ -34,7 +34,7 @@ const Card = ({ data, id_c }) => {
             <></>
           ) : (
             <li key={id} onClick={() => handlecharacter(id)}>
-          <div className="py-2 px-2 border-y border-slate-100  bg-white  hover:bg-primary-100  hover:rounded-xl space-y-2
+          <div className=" relative py-2 px-2 border-y border-slate-100  bg-white  hover:bg-primary-100  hover:rounded-xl space-y-2
             flex sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6">
             <img
               className="block mx-auto h-8 rounded-full sm:mx-0 sm:shrink-0"
@@ -43,12 +43,12 @@ const Card = ({ data, id_c }) => {
             />
             
             <div className="text-center flex space-y-2 space-x-2 sm:text-left">
-              <div className="space-y-0.5 mr-4">
+              <div className="space-y-0.5 mr-4 ">
                 <p className="text-lg text-black font-semibold">{name}</p>
                 <p className="text-slate-500 font-small">Species {species}</p>
               </div>
               <button
-                className="block mx-auto px-1 py-1 text-sm  rounded-full  bg-white focus:outline-none 
+                className="relative block  px-1 py-1 text-sm  rounded-full  bg-white focus:outline-none 
                 focus:ring-2 focus:ring-secondary-600 focus:ring-offset-2"
                 onClick={() => elementlist(id)}
               >

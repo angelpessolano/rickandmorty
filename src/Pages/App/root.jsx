@@ -149,7 +149,9 @@ export default function Root() {
           </div>
 
           <Search_c Search_ch={Search_ch} />
-          {context.avancefilter === true ? <Filter_A /> : ""}
+          {context.avancefilter === true ? 
+         
+          <Filter_A /> : ""}
 
           {context.count > 0 && context.filtercharacter !== "Others" ? (
             <>

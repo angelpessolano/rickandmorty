@@ -1,0 +1,21 @@
+
+.hidden-radio-circle {
+  appearance: none;
+}
+
+.hidden-radio-circle input[type="radio"]::before {
+  content: "";
+  display: inline-block;
+  width: 0.875rem;
+  height: 0.875rem;
+  background-color: transparent;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  margin-right: 0.25rem;
+  vertical-align: middle;
+}
+
+.hidden-radio-circle input[type="radio"]:checked::before {
+  background-color: currentColor;
+  border-color: currentColor;
+}

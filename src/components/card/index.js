@@ -41,6 +41,7 @@ const Card = ({ data, id_c }) => {
               src={image}
               alt={name}
             />
+            
             <div className="text-center flex space-y-2 space-x-2 sm:text-left">
               <div className="space-y-0.5 mr-4">
                 <p className="text-lg text-black font-semibold">{name}</p>

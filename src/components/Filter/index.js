@@ -17,12 +17,14 @@ const Filter_A = () => {
       const[specie,setSpecie]=useState('');
 
       const handlebutton = (e) => {
-            {e.target.name==="specie"?setSpecie(e.target.id):setCharacter(e.target.id)}
+            {e.target.name==="specie" ? setSpecie(e.target.id):setCharacter(e.target.id)}
+            
           };
           function setFilter(){
 
 
             {specie!== '' && specie!== 'All'? context.setFilterspecie(specie) :context.setFilterspecie('')}
+            {character!== '' && character!== 'All'? context.setFiltercharacter(character) :context.setFiltercharacter('')}
 
             context.closeAvancefilter();
           }
@@ -30,7 +32,7 @@ const Filter_A = () => {
 
       return(
             
-        <div className="shadow bg-white w-auto h-278 absolute top-158 left-16 p-0 rounded-6  ">
+        <div className="relative shadow bg-white w-auto h-278  top-158 left-1 p-4 rounded-6 ">
         <span className="text-xs text-slate-500 font-medium pl-3">
             Character
           </span>
@@ -183,7 +185,7 @@ const Filter_A = () => {
     <div className="md:w-1/3"></div>
     <div className="md:w-2/3">
     
-      <button className={`shadow bg-purple-400 hover: bg-purple-500 focus:shadow-outline
+      <button className={`shadow bg-purple-400 hover:bg-purple-500 focus:shadow-outline
        focus:outline-none text-white font-bold py-2 px-4 rounded ${character==='' && specie===''?'rounded opacity-50 cursor-not-allowed':''}`} type="button" onClick={()=>{setFilter()}}>
        Filter
       </button>

@@ -1,8 +1,17 @@
-
+import { useContext } from "react";
+import { StarredCharacterContext } from "../../context";
 const Search_c = ({Search_ch,filter}) => {
+
+  const context = useContext(StarredCharacterContext);
+
       function Search_name(event) {
             Search_ch(event.target.value);
           }
+          function filter  ()  {
+            {context.avancefilter===false?context.openAvancefilter():context.closeAvancefilter()}
+            
+           
+          };
 
 
       return(
@@ -31,7 +40,7 @@ const Search_c = ({Search_ch,filter}) => {
             placeholder="Search or filter results"
             onChange={Search_name}
           />
-          <div className="absolute justify-center  items-center inset-y-0 right-0 flex  pr-3 bg-primary-100 focus:outline-none cursor-pointer" onClick={()=>filter}>
+          <div className="absolute justify-center  items-center inset-y-0 right-0 flex  pr-3 bg-primary-100 focus:outline-none cursor-pointer" onClick={()=>filter()}>
             <svg
               className="ml-3 w-3 h-3 text-primary-700"
               aria-hidden="true"

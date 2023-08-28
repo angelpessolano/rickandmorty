@@ -1,8 +1,9 @@
 import { useQuery, gql } from "@apollo/client";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import CardCharacterDetail from "../../components/CharacterDetail";
 import Card from "../../components/card";
 import Search_c from "../../components/search";
+import Filter_A from "../../components/Filter";
 import { StarredCharacterContext } from "../../context";
 
 import { useContext } from "react";
@@ -34,13 +35,19 @@ const GET_DATA = gql`
 `;
 function DataCharacter({ id }) {
   const { loading, error, data } = useQuery(GET_DATA, { variables: { id } });
+  const context = useContext(StarredCharacterContext);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error : {error.message}</p>;
 
   return (
     <>
-    <div className="bg-white h-10 w-10 border-current cursor-pointer sm:hidden" onClick={()=>{console.log("ATRAS")}}>🔙</div>
+      <div
+        className="bg-white h-10 w-10 border-current cursor-pointer sm:hidden"
+        onClick={() => context.closeCharacterDetail()}
+      >
+        🔙
+      </div>
       <CardCharacterDetail data={data} />
     </>
   );
@@ -60,13 +67,12 @@ function DisplayCharacters({ name_c, id_c }) {
 
   return (
     <>
-      <Card data={data} id_c={id_c}  />
+      <Card data={data} id_c={id_c} />
     </>
   );
 }
 
 export default function Root() {
-  
   const [name_c, setName_c] = useState("rick");
   const [idm, setIdm] = useState(null);
   const [starred, setStarred] = useState([]);
@@ -76,39 +82,49 @@ export default function Root() {
     //console.log("outside",id_c);
     setIdm(id_c);
   };
-  useEffect(() => {  console.log("cambio",context.characterlike) },[context.characterlike]);
-  const filter = (press) => {
-    console.log("button");
-  };
+  useEffect(() => {
+    console.log("cambio", context.characterlike);
+  }, [context.characterlike]);
+ 
   const Search_ch = (val) => {
-    console.log("VAL", val);
+    
     setName_c(val);
   };
+  
 
   return (
     <>
       <div className="flex">
         <div
-          className=" flex-col w-[375px] h-screen pl-4 pr-2 py-8 overflow-y-auto border-r border-gray-100 bg-gray-50/50 
-          hidden sm:block"
-          id="sidebar">
+          className={` flex-col w-[375px] h-screen pl-4 pr-2 py-8 overflow-y-auto border-r border-gray-100 bg-gray-50/50 
+          ${context.characterDetail === true ? "hidden sm:block " : ""}`}
+          id="sidebar"
+        >
           <div className="h-[82] p-[42]">
             <p className="text-slate-500 font-medium ">Ricky and Morty</p>
           </div>
 
-          <Search_c Search_ch={Search_ch} filter={filter} />
+          <Search_c Search_ch={Search_ch} />
+          {context.avancefilter===true?<Filter_A/>:<p>falso</p>}
           <span className="text-xs text-slate-500 font-medium pl-3">
             STARRED CHARACTERS ({context.count})
           </span>
-          
-          <DisplayCharacters name_c={name_c} id_c={id_c}  />
-          
-        </div>
-        <div className="flex-auto py-10 px [100] pt-4 pr[100] m-8 ">
-    
 
-          <DataCharacter id={idm ? idm : ""} starred={starred} />
+          <DisplayCharacters name_c={name_c} id_c={id_c} />
         </div>
+        {context.characterDetail === false ? (
+          <></>
+        ) : (
+          <>
+            <div
+              className={` flex-auto py-10 px [100] pt-4 pr[100] m-8 ${
+                context.characterDetail === false ? "hidden sm:block " : ""
+              }`}
+            >
+              <DataCharacter id={idm ? idm : ""} starred={starred} />
+            </div>
+          </>
+        )}
       </div>
     </>
   );

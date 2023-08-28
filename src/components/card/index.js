@@ -5,6 +5,7 @@ import { StarredCharacterContext } from "../../context";
 const Card = ({ data, id_c }) => {
   const context = useContext(StarredCharacterContext);
   const handlecharacter = (character_id) => {
+    context.openCharacterDetail();
     id_c(character_id);
   };
   const elementlist = (id) => {

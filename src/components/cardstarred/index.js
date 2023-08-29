@@ -6,23 +6,29 @@ const CardStarred = ({ name, data, filter_c }) => {
   const navigate = useNavigate();
 
   const context = useContext(StarredCharacterContext);
-  console.log("Lista filter", filter_c);
+  
 
   const handlecharacter = (character_id) => {
     navigate(`/character/${character_id}`);
     context.openCharacterDetail();
   };
-  const elementlist = (id) => {
-    //console.log("object", id);
-    if (context.characterlike.indexOf(id) !== -1) {
+  const elementlist = (data) => {
+  
+    if (context.characterlike.indexOf(data.id) !== -1) {
       context.setCount(context.count - 1);
 
-      context.characterlike.splice(context.characterlike.indexOf(id), 1);
+      context.characterlike.splice(context.characterlike.indexOf(data.id), 1);
       context.setCharacterLiked(context.characterlike);
+//let temporal={};
+  
+     // context.likeorder.sort((a, b) => a.name.localeCompare(b.name));
+  
+
     } else {
       context.setCount(context.count + 1);
       // console.log("nuevo");
-      context.setCharacterLiked([...context.characterlike, id]);
+      context.setCharacterLiked([...context.characterlike, data.id]);
+      //context.likeorder.sort((a, b) => a.name.localeCompare(b.name));
 
       //favele([...context.characterlike, id]);
     }
@@ -63,7 +69,7 @@ const CardStarred = ({ name, data, filter_c }) => {
                 </div>
                 <div
                   className="cursor-pointer pl-2 pt-2 w-8 h-8 rounded-full bg-white"
-                  onClick={() => elementlist(data.character.id)}
+                  onClick={() => elementlist(data.character)}
                 >
                   <svg
                     className="w-[1.15rem] h-[1.15rem] text-green-500"

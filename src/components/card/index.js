@@ -18,22 +18,24 @@ const Card = ({ data}) => {
 
 
   };
-  const elementlist = (id) => {
+  const elementlist = (id,name) => {
     //console.log("object", id);
     if (context.characterlike.indexOf(id) !== -1) {
       context.setCount(context.count - 1);
 
-      context.characterlike.splice(context.characterlike.indexOf(id), 1);
+      context.characterlike.splice(context.characterlike.indexOf(id), 1);    
+      
       context.setCharacterLiked(context.characterlike);
     } else {
       context.setCount(context.count + 1);
       // console.log("nuevo");
       context.setCharacterLiked([...context.characterlike, id]);
+      context.setLikedorder([...context.likeorder,{id,name}]);
 
       //favele([...context.characterlike, id]);
     }
 
-    // console.log("Lista", context.characterlike);
+    
   };
 
   return (
@@ -64,7 +66,7 @@ const Card = ({ data}) => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 21 19"
-                    onClick={() => elementlist(id)}
+                    onClick={() => elementlist(id,name)}
                   >
                     <path
                       stroke="currentColor"

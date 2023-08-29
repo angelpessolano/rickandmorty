@@ -109,11 +109,12 @@ desnomb[index]={id,name}
 
 function StarredCharacters({id, filter_c }) {
 
-  useEffect(() => {  console.log("HIII"); },[]);
-  // console.log("QUE HAY",id);
+  
+  
   const { loading, error, data } = useQuery(GET_DATA, { variables: { id } });
   const context = useContext(StarredCharacterContext);
-
+  console.log("como esta",context.likeorder);
+ 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error : {error.message}</p>;
 
@@ -147,14 +148,14 @@ export default function Root() {
 
   return (
     <>
-      <div className="flex">
+      <div className="flex sm:w-screen">
         <div
-          className={` flex-col w-[375px] h-screen pl-4 pr-2 py-8 overflow-y-auto border-r border-gray-100 bg-gray-50/50
-          ${context.characterDetail === true ? "hidden sm:block " : ""}`}
+          className={` flex-col w-[375px] h-screen pl-4 pr-2 py-8 overflow-y-auto border-r border-gray-100  bg-gray-50/50
+          ${context.characterDetail === true ? "hidden sm:block" : ""}`}
           id="sidebar"
         >
           <div className="h-[82] p-[42]">
-            <p className="text-slate-500 font-medium ">Ricky and Morty</p>
+            <p className="text-slate-500 font-Large ">Ricky and Morty</p>
           </div>
 
           <Search_c Search_ch={(e)=>{context.setSearchG(e)}} />
@@ -166,11 +167,11 @@ export default function Root() {
                 STARRED CHARACTERS ({context.count})
               </span>
               <ul className="pl-2">
-                {context.characterlike.map((item) => (
+                {
+                context.characterlike.map((item) => (
                   <StarredCharacters
 
                     id={item}
-                    id_c={id_c}
                     filter_c={context.filterspecie}
                   />
                 ))}
@@ -197,7 +198,7 @@ export default function Root() {
           <>
             <div
               className={`flex-auto py-10 px-10 pt-4 m-8 ${
-                context.characterDetail === false ? "hidden sm:block " : ""
+                context.characterDetail === false ? "" : ""
               }`}
             >
               <Outlet/>

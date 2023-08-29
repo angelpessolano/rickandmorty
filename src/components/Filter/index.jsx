@@ -48,7 +48,7 @@ const Filter_A = () => {
     onClick={() => context.closeAvancefilter()}
   >
    <svg class="w-6 h-6 text-primary-700 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4"/>
+    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 5H1m0 0 4 4M1 5l4-4"/>
   </svg>
   </div>
 
@@ -66,12 +66,13 @@ const Filter_A = () => {
           id={option.value}
           name="character"
           value={option.value}
+          disabled={option.value==='Starred'&&context.count===0?true:false}
           className="hidden peer"
           required
         />
         <label
           htmlFor={option.value}
-          className="inline-flex items-center justify-between p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+          className={`inline-flex items-center justify-between p-2 text-primary-700 bg-primary-100 border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-primary-700 peer-checked:text-primary-700 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700${option.value==='Starred'&&context.count==0?'rounded opacity-50 cursor-not-allowed':''}`}
         >
           <div className="block">
             <div className="w-full text-lg font-semibold">{option.label}</div>
@@ -98,7 +99,7 @@ const Filter_A = () => {
         />
         <label
           htmlFor={option.value}
-          className="inline-flex items-center justify-between p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+          className="inline-flex items-center justify-between p-2 text-primary-700 bg-primary-100 border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-primary-700 peer-checked:text-primary-700 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
         >
           <div className="block">
             <div className="w-full text-lg font-semibold">{option.label}</div>

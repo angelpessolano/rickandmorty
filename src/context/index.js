@@ -12,8 +12,9 @@ export const StarredCharacterProvider = ({ children }) => {
 
   const openCharacterDetail = () => setCharacterDetail(true);
   const closeCharacterDetail = () => setCharacterDetail(false);
-  //character liked
+  //character liked contiene los id de caracteres agregados
   const [characterlike, setCharacterLiked] = useState([]);
+
   const [likeorder, setLikedorder] = useState([]);
   //  mostrar o ocultar filtro
   const [avancefilter, setAvancefilter] = useState(false);
@@ -22,7 +23,7 @@ export const StarredCharacterProvider = ({ children }) => {
   const [filtercharacter, setFiltercharacter] = useState("");
   const [filterspecie, setFilterspecie] = useState("");
 
-  const [dataprocess, setDataprocess] = useState({});
+  const [dataprocess, setDataprocess] = useState([]);
 
   return (
     <StarredCharacterContext.Provider

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { StarredCharacterContext } from "../../context";
 import { useNavigate } from "react-router-dom";
 
@@ -13,25 +13,25 @@ const CardStarred = ({ name, data, filter_c }) => {
     context.openCharacterDetail();
   };
   const elementlist = (data) => {
+    const id=data.id;
+    const name=data.name;
   
     if (context.characterlike.indexOf(data.id) !== -1) {
       context.setCount(context.count - 1);
 
       context.characterlike.splice(context.characterlike.indexOf(data.id), 1);
       context.setCharacterLiked(context.characterlike);
+      context.setDataprocess([...context.dataprocess,{name,id}]);
+      
+      //context.setLikedorder([...context.likeorder,{id,name}]);
+    }
+      
 //let temporal={};
   
      // context.likeorder.sort((a, b) => a.name.localeCompare(b.name));
   
 
-    } else {
-      context.setCount(context.count + 1);
-      // console.log("nuevo");
-      context.setCharacterLiked([...context.characterlike, data.id]);
-      //context.likeorder.sort((a, b) => a.name.localeCompare(b.name));
-
-      //favele([...context.characterlike, id]);
-    }
+    
 
     // console.log("Lista", context.characterlike);
   };

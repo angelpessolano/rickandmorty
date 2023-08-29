@@ -6,7 +6,7 @@ import Search_c from "../../components/search";
 import Filter_A from "../../components/Filter";
 import { StarredCharacterContext } from "../../context";
 import { Outlet } from "react-router-dom";
-
+import { useParams } from "react-router-dom";
 
 import { useContext } from "react";
 
@@ -114,6 +114,9 @@ function StarredCharacters({id, filter_c }) {
   const { loading, error, data } = useQuery(GET_DATA, { variables: { id } });
   const context = useContext(StarredCharacterContext);
   console.log("como esta",context.likeorder);
+  console.log("order",context.dataprocess);
+
+  
  
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error : {error.message}</p>;
@@ -132,13 +135,15 @@ function StarredCharacters({id, filter_c }) {
 // function
 
 export default function Root() {
+  let { id } = useParams();
 
-  useEffect(() => {   },[]);
+  
   // const [name_c, setName_c] = useState("");
   const [idm, setIdm] = useState(null);
 
 
   const context = useContext(StarredCharacterContext);
+  useEffect(() => {  console.log('HIIII',context.dataprocess); },[context.dataprocess]);
   const id_c = (id_c) => {
     //console.log("outside",id_c);
     setIdm(id_c);
@@ -196,11 +201,13 @@ export default function Root() {
           <></>
         ) : (
           <>
+          
             <div
               className={`flex-auto py-10 px-10 pt-4 m-8 ${
-                context.characterDetail === false ? "" : ""
+                context.characterDetail === false ? "hidden sm:block" : ""
               }`}
             >
+              
               <Outlet/>
             </div>
           </>

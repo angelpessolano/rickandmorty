@@ -30,7 +30,7 @@ function DataCharacter() {
         onClick={() => context.closeCharacterDetail()}
       >
         <svg
-          class="w-6 h-6 text-primary-700 dark:text-white"
+          className="w-6 h-6 text-primary-700 dark:text-white"
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -38,9 +38,9 @@ function DataCharacter() {
         >
           <path
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
             d="M13 5H1m0 0 4 4M1 5l4-4"
           />
         </svg>

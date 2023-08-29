@@ -3,8 +3,11 @@ import { createContext, useState } from "react";
  export const StarredCharacterContext = createContext()
 
 export const StarredCharacterProvider = ({children})=>{
+      //varible global del buscador
+      
 
-     // const [name_c,set]
+      const [searchG,setSearchG]=useState('');
+
       const [count,setCount] = useState(0);
       const [characterDetail,setCharacterDetail] = useState(false);
      
@@ -24,6 +27,8 @@ export const StarredCharacterProvider = ({children})=>{
   
       return(
             <StarredCharacterContext.Provider value={{
+                  searchG,
+                  setSearchG,
                   count,
                   setCount,
                   characterlike,

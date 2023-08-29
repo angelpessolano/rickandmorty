@@ -4,18 +4,18 @@ import { StarredCharacterContext } from "../../context";
 import { useNavigate } from "react-router-dom";
 
 
-  
 
 
-const Card = ({ data, id_c }) => {
+
+const Card = ({ data}) => {
   const navigate = useNavigate();
   const context = useContext(StarredCharacterContext);
   const handlecharacter = (character_id) => {
 
-   
+
     navigate(`/character/${character_id}`);
     context.openCharacterDetail();
-    id_c(character_id);
+
 
   };
   const elementlist = (id) => {
@@ -37,7 +37,7 @@ const Card = ({ data, id_c }) => {
   };
 
   return (
-    <ul className="w-[375px] pl-2">
+    <ul className="pl-2">
       {data.characters.results.map(({ id, name, species, image, gender }) => (
         <>
           {context.characterlike.indexOf(id) !== -1 ? (
@@ -51,24 +51,20 @@ const Card = ({ data, id_c }) => {
               src={image}
               alt={name}
             />
-            
-            <div className="text-center flex space-y-2 space-x-2 sm:text-left">
-              <div className="space-y-0.5 mr-4 ">
+
+            <div className="text-center flex space-y-2 space-x-2 sm:text-left pr-1.5">
+              <div className="space-y-0.5 w-[215px]">
                 <p className="text-lg text-black font-semibold">{name}</p>
                 <p className="text-slate-500 font-small">Species {species}</p>
               </div>
-              <button
-                className="relative block  px-1 py-1 text-sm  rounded-full  bg-white focus:outline-none 
-                focus:ring-2 focus:ring-secondary-600 focus:ring-offset-2"
-                onClick={() => elementlist(id)}
-              >
-                
+              <div className="bg-transparent pl-1.5 pt-2 text-gray-400/50">
                 <svg
-                    className="w-6 h-6"
+                    className="w-[1.25rem] h-[1.25rem] cursor-pointer"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 21 19"
+                    onClick={() => elementlist(id)}
                   >
                     <path
                       stroke="currentColor"
@@ -78,20 +74,19 @@ const Card = ({ data, id_c }) => {
                       d="M11 4C5.5-1.5-1.5 5.5 4 11l7 7 7-7c5.458-5.458-1.542-12.458-7-7Z"
                     />
                   </svg>
-              
-              </button>
+              </div>
             </div>
           </div>
         </li>
           )}
-       
+
 
 
         </>
 
       ))}
     </ul>
-    
+
   );
 };
 export default Card;

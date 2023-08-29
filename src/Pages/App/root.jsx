@@ -10,6 +10,7 @@ import { Outlet } from "react-router-dom";
 
 import { useContext } from "react";
 
+
 const GET_DATA = gql`
   query Character($id: ID!) {
     character(id: $id) {
@@ -55,23 +56,50 @@ const GET_CHARACTERS = gql`
     }
   }
 `;
-function DisplayCharacters({ name_c, id_c }) {
+
+
+
+
+
+
+
+
+
+
+function DisplayCharacters() {
+
+
   const context = useContext(StarredCharacterContext);
+  const name_c = context.searchG;
   const species = context.filterspecie;
   const pag = 1;
+  const desnomb=[]
 
   const { loading, error, data } = useQuery(GET_CHARACTERS, {
     variables: { name_c, species,pag },
   });
-  console.log(data);
+
+
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error : {error.message}</p>;
-  //console.log(data.characters.results, name_c);
+
+
+  // console.log("que es",typeof(data.characters.results));
+  {data.characters.results.map(({ id, name },index) => (
+
+desnomb[index]={id,name}
+    
+      ))}
+      desnomb.sort((a, b) => a.name.localeCompare(b.name));
+      console.log("Modo 1",desnomb);
+      // desnomb.sort((a, b) => b.name.localeCompare(a.name));
+      // console.log("Modo 2",desnomb);
+  
 
   return (
     <>
-      <Card data={data} id_c={id_c} />
+      <Card data={data}/>
     </>
   );
 }
@@ -79,7 +107,9 @@ function DisplayCharacters({ name_c, id_c }) {
 
 
 
-function StarredCharacters({ name_c, id, id_c, filter_c }) {
+function StarredCharacters({id, filter_c }) {
+
+  useEffect(() => {  console.log("HIII"); },[]);
   // console.log("QUE HAY",id);
   const { loading, error, data } = useQuery(GET_DATA, { variables: { id } });
   const context = useContext(StarredCharacterContext);
@@ -90,9 +120,8 @@ function StarredCharacters({ name_c, id, id_c, filter_c }) {
   return (
     <>
       <CardStarred
-        name_c={name_c}
+       name={context.searchG}
         data={data}
-        id_c={id_c}
         filter_c={filter_c}
       />
     </>
@@ -104,28 +133,23 @@ function StarredCharacters({ name_c, id, id_c, filter_c }) {
 export default function Root() {
 
   useEffect(() => {   },[]);
-  const [name_c, setName_c] = useState("");
+  // const [name_c, setName_c] = useState("");
   const [idm, setIdm] = useState(null);
-  
+
 
   const context = useContext(StarredCharacterContext);
   const id_c = (id_c) => {
     //console.log("outside",id_c);
     setIdm(id_c);
   };
-  // useEffect(() => {
-  //   console.log("cambio", context.characterlike);
-  // }, [context.characterlike]);
 
-  const Search_ch = (val) => {
-    setName_c(val);
-  };
+
 
   return (
     <>
       <div className="flex">
         <div
-          className={` flex-col w-[375px] h-screen pl-4 pr-2 py-8 overflow-y-auto border-r border-gray-100 bg-gray-50/50 
+          className={` flex-col w-[375px] h-screen pl-4 pr-2 py-8 overflow-y-auto border-r border-gray-100 bg-gray-50/50
           ${context.characterDetail === true ? "hidden sm:block " : ""}`}
           id="sidebar"
         >
@@ -133,7 +157,7 @@ export default function Root() {
             <p className="text-slate-500 font-medium ">Ricky and Morty</p>
           </div>
 
-          <Search_c Search_ch={Search_ch} />
+          <Search_c Search_ch={(e)=>{context.setSearchG(e)}} />
           {context.avancefilter === true ? <Filter_A /> : ""}
 
           {context.count > 0 && context.filtercharacter !== "Others" ? (
@@ -141,10 +165,10 @@ export default function Root() {
               <span className="text-xs text-slate-500 font-medium pl-3">
                 STARRED CHARACTERS ({context.count})
               </span>
-              <ul className="w-[375px] pl-2">
+              <ul className="pl-2">
                 {context.characterlike.map((item) => (
                   <StarredCharacters
-                    name_c={name_c}
+
                     id={item}
                     id_c={id_c}
                     filter_c={context.filterspecie}
@@ -161,7 +185,7 @@ export default function Root() {
                 CHARACTERS
               </span>
 
-              <DisplayCharacters name_c={name_c} id_c={id_c} />
+              <DisplayCharacters  />
             </>
           ) : (
             <></>
@@ -172,7 +196,7 @@ export default function Root() {
         ) : (
           <>
             <div
-              className={` flex-auto py-10 px [100] pt-4 pr[100] m-8 ${
+              className={`flex-auto py-10 px-10 pt-4 m-8 ${
                 context.characterDetail === false ? "hidden sm:block " : ""
               }`}
             >

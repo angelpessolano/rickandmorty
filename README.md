@@ -1,13 +1,17 @@
+# Available Scripts
 
+### Primero Instalar Paquetes
 
-## Available Scripts
+#### `npm install`
 
-Primero Instalar Paquetes
-### `npm install`
+Luego ejecutar
 
-Luego
 ### `npm start`
 
-Para Subirlo a prod
+ Asegurar que el código esté optimizado y listo para su uso en producción
 
-### `npm run build`
+#### `npm run build`
+
+### Aplicación desplegada en Vercel:
+
+https://rickandmorty-psi-pearl.vercel.app/character/1

@@ -113,8 +113,8 @@ function StarredCharacters({id, filter_c }) {
   
   const { loading, error, data } = useQuery(GET_DATA, { variables: { id } });
   const context = useContext(StarredCharacterContext);
-  console.log("como esta",context.likeorder);
-  console.log("order",context.dataprocess);
+ // console.log("como esta",context.likeorder);
+ // console.log("order",context.dataprocess);
 
   
  
@@ -135,7 +135,7 @@ function StarredCharacters({id, filter_c }) {
 // function
 
 export default function Root() {
-  let { id } = useParams();
+  
 
   
   // const [name_c, setName_c] = useState("");
